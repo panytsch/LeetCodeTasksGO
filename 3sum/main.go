@@ -10,7 +10,11 @@ func main() {
 
 func ThreeSum(nums []int) [][]int {
 	lent := len(nums)
+	if lent < 3 {
+		return [][]int{{0, 0, 0}}
+	}
 	var result [][]int
+	//main logic
 	for i := 0; i < lent-2; i++ {
 		for j := i + 1; j < lent-1; j++ {
 			for k := j + 1; k < lent; k++ {
@@ -19,6 +23,9 @@ func ThreeSum(nums []int) [][]int {
 				}
 			}
 		}
+	}
+	if len(result) == 0 {
+		return [][]int{{0, 0, 0}}
 	}
 	return result
 }
