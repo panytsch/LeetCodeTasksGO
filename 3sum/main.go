@@ -13,11 +13,13 @@ func ThreeSum(nums []int) [][]int {
 	if lent < 3 {
 		return [][]int{{0, 0, 0}}
 	}
+	//main logic start
 	var result [][]int
-	//main logic
-	for i := 0; i < lent-2; i++ {
-		for j := i + 1; j < lent-1; j++ {
-			for k := j + 1; k < lent; k++ {
+
+	for i := 0; i < lent/2; i++ {
+		for j := lent - 1; j > lent/2; j-- {
+			for k := i + 1; k < j; k++ {
+				fmt.Println(i, j, k)
 				if nums[i]+nums[j]+nums[k] == 0 {
 					result = append(result, []int{nums[i], nums[j], nums[k]})
 				}
