@@ -3,6 +3,7 @@ package tasks
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -48,6 +49,17 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 				break
 			}
 			_, _ = w.Write(js)
+		}
+	case http.MethodPost:
+		task := TaskPostRequest{}
+		decoder := json.NewDecoder(r.Body)
+		err := decoder.Decode(&task)
+		if err != nil {
+			w.WriteHeader(http.StatusNotAcceptable)
+			log.Print(err.Error())
+		} else {
+			TaskPool[task.Id] = task.Task
+			w.WriteHeader(http.StatusCreated)
 		}
 	}
 }

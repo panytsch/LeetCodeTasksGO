@@ -5,3 +5,8 @@ type Task struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 }
+
+type TaskPostRequest struct {
+	Id   int  `json:"id"`
+	Task Task `json:"task"`
+}
