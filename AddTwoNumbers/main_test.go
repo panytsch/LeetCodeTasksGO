@@ -14,7 +14,7 @@ func TestAddTwoNumbers(t *testing.T) {
 	for _, c := range getTestCases() {
 		res := AddTwoNumbers(c.input1, c.input2)
 		if compareNodes(res, c.output) == false {
-			t.Error("Failed! Nodes:", c.input1, c.input2, "res:", getStringFromNode(res), "should be:", getStringFromNode(c.output))
+			t.Error("Failed! Nodes:", getStringFromNode(c.input1), getStringFromNode(c.input2), "res:", getStringFromNode(res), "should be:", getStringFromNode(c.output))
 		}
 	}
 }
@@ -91,6 +91,11 @@ func getTestCases() []testCase {
 			createNode([]int{0, 8, 8, 8, 8, 2, 9, 3, 1, 1}),
 			createNode([]int{0, 9, 1, 5, 5, 5, 1, 1, 6}),
 			createNode([]int{0, 7, 0, 4, 4, 8, 0, 5, 7, 1}),
+		},
+		{
+			createNode([]int{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}),
+			createNode([]int{5, 6, 4}),
+			createNode([]int{6, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}),
 		},
 		{
 			&ListNode{},

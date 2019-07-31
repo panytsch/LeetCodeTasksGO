@@ -1,6 +1,7 @@
 package AddTwoNumbers
 
 import (
+	"log"
 	"strconv"
 	"strings"
 )
@@ -11,7 +12,7 @@ type ListNode struct {
 }
 
 func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1.Val == 0 && l2.Val == 0 {
+	if l1.Val == 0 && l2.Val == 0 && l1.Next == nil && l2.Next == nil {
 		return &ListNode{}
 	} else if l1.Val == 0 && l1.Next == nil {
 		return createNode(convSliceToInt(convIntToSlice(convertToNumber(l2))))
@@ -20,6 +21,7 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	s1 := makeIntFromSlice(reverseString(strings.Split(getStringFromNode(l1), "")))
 	s2 := makeIntFromSlice(reverseString(strings.Split(getStringFromNode(l2), "")))
+	log.Println(s1, s2) //todo convert 1000000000000000000000000000001 in to 0
 	return createNode(reverseInt(convSliceToInt(convIntToSlice(s1 + s2))))
 }
 
