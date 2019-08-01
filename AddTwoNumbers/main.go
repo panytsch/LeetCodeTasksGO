@@ -19,18 +19,47 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	} else if l2.Val == 0 && l2.Next == nil {
 		return createNode(convSliceToInt(convIntToSlice(convertToNumber(l1))))
 	}
-	s1 := makeIntFromSlice(reverseString(strings.Split(getStringFromNode(l1), "")))
-	s2 := makeIntFromSlice(reverseString(strings.Split(getStringFromNode(l2), "")))
-	log.Println(s1, s2) //todo convert 1000000000000000000000000000001 in to 0
-	return createNode(reverseInt(convSliceToInt(convIntToSlice(s1 + s2))))
+	s1 := convSliceToInt(reverseString(strings.Split(getStringFromNode(l1), "")))
+	s2 := convSliceToInt(reverseString(strings.Split(getStringFromNode(l2), "")))
+	log.Println(s1, s2)
+	//return createNode(reverseInt(convSliceToInt(convIntToSlice(s1 + s2))))
+	return createNode(addTwoSlices(s1, s2))
 }
 
-func makeIntFromSlice(i []string) int {
-	s, e := strconv.Atoi(strings.Join(i, ""))
-	if e != nil {
-		return 0
+func addTwoSlices(s1 []int, s2 []int) []int {
+	more9 := false
+	var res []int
+	cond := len(s1) > len(s2)
+	var big []int
+	var small []int
+	if cond {
+		big = s1
+		small = s2
+	} else {
+		big = s2
+		small = s1
 	}
-	return s
+	lenSmall := len(small) - 1
+	for i, v := range big {
+		if i > lenSmall {
+			if more9 {
+				v++
+			}
+			res = append(res, v)
+		} else {
+			summ := v + small[i]
+			if more9 {
+				summ++
+				more9 = false
+			}
+			if summ > 9 {
+				more9 = true
+				summ = summ % 10
+			}
+			res = append(res, summ)
+		}
+	}
+	return res
 }
 
 func convertToNumber(node *ListNode) int {
