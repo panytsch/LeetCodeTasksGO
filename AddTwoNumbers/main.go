@@ -22,7 +22,6 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	s1 := convSliceToInt(reverseString(strings.Split(getStringFromNode(l1), "")))
 	s2 := convSliceToInt(reverseString(strings.Split(getStringFromNode(l2), "")))
 	log.Println(s1, s2)
-	//return createNode(reverseInt(convSliceToInt(convIntToSlice(s1 + s2))))
 	return createNode(addTwoSlices(s1, s2))
 }
 
@@ -40,14 +39,22 @@ func addTwoSlices(s1 []int, s2 []int) []int {
 		small = s1
 	}
 	lenSmall := len(small) - 1
-	for i, v := range big {
-		if i > lenSmall {
+	lenBig := len(big) - 1
+	j := lenSmall
+	for i := lenBig; i >= 0; i-- {
+		if j < 0 {
+			summ := big[i]
 			if more9 {
-				v++
+				summ++
+				if summ > 9 {
+					summ = summ % 10
+				} else {
+					more9 = false
+				}
 			}
-			res = append(res, v)
+			res = append(res, summ)
 		} else {
-			summ := v + small[i]
+			summ := big[i] + small[j]
 			if more9 {
 				summ++
 				more9 = false
@@ -58,6 +65,10 @@ func addTwoSlices(s1 []int, s2 []int) []int {
 			}
 			res = append(res, summ)
 		}
+		j--
+	}
+	if more9 {
+		res = append(res, 1)
 	}
 	return res
 }
