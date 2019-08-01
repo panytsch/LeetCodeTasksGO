@@ -111,18 +111,6 @@ func remove(s []int, index int) []int {
 	return append(s[:index], s[index+1:]...)
 }
 
-func reverseInt(x []int) []int {
-	l := len(x)
-	if l < 2 {
-		return x
-	}
-	for i := l/2 - 1; i >= 0; i-- {
-		opp := l - 1 - i
-		x[i], x[opp] = x[opp], x[i]
-	}
-	return x
-}
-
 func reverseString(x []string) []string {
 	l := len(x)
 	if l < 2 {
